@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LaporDesa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>LaporDesa</h1>
+    <p class="subtitle">Pelayanan publik desa online</p>
+
+    <div class="card">
+      <h2>1. Form Pengaduan Masyarakat</h2>
+      <form id="pengaduanForm">
+        <input type="text" id="nama" placeholder="Nama" required>
+        <input type="text" id="judul" placeholder="Judul pengaduan" required>
+        <textarea id="isi" placeholder="Isi pengaduan..." required></textarea>
+        <label>Upload foto bukti:</label>
+        <input type="file" id="foto" accept="image/*">
+        <button type="submit">Kirim Pengaduan</button>
+      </form>
+      <div id="hasilPengaduan"></div>
+    </div>
+
+    <div class="card">
+      <h2>2. Form Pengajuan Surat</h2>
+      <form id="suratForm">
+        <input type="text" id="namaSurat" placeholder="Nama pemohon" required>
+        <select id="jenisSurat" required>
+          <option value="">Pilih jenis surat</option>
+          <option value="Surat Domisili">Surat Domisili</option>
+          <option value="Surat Keterangan Usaha">Surat Keterangan Usaha</option>
+          <option value="Surat Pengantar">Surat Pengantar</option>
+        </select>
+        <textarea id="keperluan" placeholder="Keperluan surat..." required></textarea>
+        <button type="submit">Ajukan Surat</button>
+      </form>
+      <div id="hasilSurat"></div>
+    </div>
+
+    <div class="card">
+      <h2>3. Tracking Status Layanan</h2>
+      <button onclick="loadData()">Refresh Data</button>
+
+      <h3>Daftar Pengaduan</h3>
+      <div id="listPengaduan"></div>
+
+      <h3>Daftar Pengajuan Surat</h3>
+      <div id="listSurat"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

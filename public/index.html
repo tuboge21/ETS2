@@ -3,53 +3,266 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LaporDesa</title>
-  <link rel="stylesheet" href="style.css">
+  <title>LaporDesa - Pelayanan Publik</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #f3f4f6;
+      --card-bg: #ffffff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --input-focus: rgba(37, 99, 235, 0.15);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+    }
+
+    header p.subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(229, 231, 235, 0.5);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      background-color: #f9fafb;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background-color: #fff;
+      box-shadow: 0 0 0 4px var(--input-focus);
+    }
+
+    input[type="file"] {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      padding: 0.5rem 0;
+    }
+
+    input[type="file"]::file-selector-button {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-right: 1rem;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+      background-color: var(--bg-color);
+    }
+
+    button {
+      width: 100%;
+      padding: 0.875rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background-color: var(--primary-hover);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--bg-color);
+    }
+
+    /* Styling untuk area hasil/list */
+    .result-area {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .list-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem 0;
+      color: var(--text-main);
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>LaporDesa</h1>
-    <p class="subtitle">Pelayanan publik desa online</p>
+    <header>
+      <h1>LaporDesa</h1>
+      <p class="subtitle">Platform Layanan Publik Desa Terpadu</p>
+    </header>
 
-    <div class="card">
-      <h2>1. Form Pengaduan Masyarakat</h2>
-      <form id="pengaduanForm">
-        <input type="text" id="nama" placeholder="Nama" required>
-        <input type="text" id="judul" placeholder="Judul pengaduan" required>
-        <textarea id="isi" placeholder="Isi pengaduan..." required></textarea>
-        <label>Upload foto bukti:</label>
-        <input type="file" id="foto" accept="image/*">
-        <button type="submit">Kirim Pengaduan</button>
-      </form>
-      <div id="hasilPengaduan"></div>
-    </div>
+    <main>
+      <section class="card">
+        <h2>Kirim Pengaduan</h2>
+        <form id="pengaduanForm">
+          <div class="form-group">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="judul">Judul Pengaduan</label>
+            <input type="text" id="judul" placeholder="Ringkasan kejadian" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="isi">Detail Kejadian</label>
+            <textarea id="isi" placeholder="Jelaskan secara detail..." required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="foto">Bukti Foto (Opsional)</label>
+            <input type="file" id="foto" accept="image/*">
+          </div>
+          
+          <button type="submit">Kirim Laporan</button>
+        </form>
+        <div id="hasilPengaduan" class="result-area"></div>
+      </section>
 
-    <div class="card">
-      <h2>2. Form Pengajuan Surat</h2>
-      <form id="suratForm">
-        <input type="text" id="namaSurat" placeholder="Nama pemohon" required>
-        <select id="jenisSurat" required>
-          <option value="">Pilih jenis surat</option>
-          <option value="Surat Domisili">Surat Domisili</option>
-          <option value="Surat Keterangan Usaha">Surat Keterangan Usaha</option>
-          <option value="Surat Pengantar">Surat Pengantar</option>
-        </select>
-        <textarea id="keperluan" placeholder="Keperluan surat..." required></textarea>
-        <button type="submit">Ajukan Surat</button>
-      </form>
-      <div id="hasilSurat"></div>
-    </div>
+      <section class="card">
+        <h2>Pengajuan Surat Administrasi</h2>
+        <form id="suratForm">
+          <div class="form-group">
+            <label for="namaSurat">Nama Pemohon</label>
+            <input type="text" id="namaSurat" placeholder="Masukkan nama lengkap" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="jenisSurat">Jenis Surat</label>
+            <select id="jenisSurat" required>
+              <option value="" disabled selected>Pilih dokumen yang dibutuhkan</option>
+              <option value="Surat Domisili">Surat Keterangan Domisili</option>
+              <option value="Surat Keterangan Usaha">Surat Keterangan Usaha (SKU)</option>
+              <option value="Surat Pengantar">Surat Pengantar RT/RW</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="keperluan">Tujuan Keperluan</label>
+            <textarea id="keperluan" placeholder="Misal: Persyaratan pembuatan rekening bank..." required></textarea>
+          </div>
+          
+          <button type="submit">Ajukan Permohonan</button>
+        </form>
+        <div id="hasilSurat" class="result-area"></div>
+      </section>
 
-    <div class="card">
-      <h2>3. Tracking Status Layanan</h2>
-      <button onclick="loadData()">Refresh Data</button>
+      <section class="card">
+        <h2>Status Layanan Anda</h2>
+        <button type="button" class="btn-outline" onclick="loadData()">Segarkan Data</button>
 
-      <h3>Daftar Pengaduan</h3>
-      <div id="listPengaduan"></div>
+        <div class="list-section">
+          <h3>Riwayat Pengaduan</h3>
+          <div id="listPengaduan" class="result-area">Belum ada data pengaduan...</div>
+        </div>
 
-      <h3>Daftar Pengajuan Surat</h3>
-      <div id="listSurat"></div>
-    </div>
+        <div class="list-section">
+          <h3>Riwayat Surat</h3>
+          <div id="listSurat" class="result-area">Belum ada pengajuan surat...</div>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script src="app.js"></script>
